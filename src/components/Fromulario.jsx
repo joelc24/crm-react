@@ -1,6 +1,17 @@
 import { Formik, Form, Field } from 'formik'
+import * as Yup from 'yup'
+import Alerta from './Alerta'
 
 const Formulario = () => {
+
+    const nuevoClienteSchema = Yup.object().shape({
+        nombre: Yup.string()
+                    .min(3,'El Nombre es Muy Corto')
+                    .max(20,'El Nombre es Muy Largo')
+                    .required('El Nombre del Cliente es Obligatorio'),
+        
+    })
+
     const handleSubmit = (valores) =>{
         console.log(valores)
     }
@@ -16,8 +27,11 @@ const Formulario = () => {
                     notas: ''
                 }}
                 onSubmit={(values)=> handleSubmit( values)}
+                validationSchema={nuevoClienteSchema}
             >
-                {()=> (
+                {({errors, touched})=> {
+                    //console.log(errors) 
+                    return(
 
                 <Form className='mt-10'>
                     <div className='mb-4'>
@@ -32,6 +46,9 @@ const Formulario = () => {
                             placeholder="Nombre del Cliente"
                             name="nombre"
                         />
+                        {errors.nombre && touched.nombre ? (
+                            <Alerta>{errors.nombre}</Alerta>
+                        ): null}
                     </div>
                     <div className='mb-4'>
                         <label 
@@ -92,7 +109,7 @@ const Formulario = () => {
                         className='mt-5 w-full bg-blue-800 p-3 text-white uppercase font-bold text-lg cursor-pointer hover:bg-blue-900'
                     />
                 </Form>
-                )}
+                )}}
             </Formik>
         </div>
      );
