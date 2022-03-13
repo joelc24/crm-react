@@ -9,6 +9,17 @@ const Formulario = () => {
                     .min(3,'El Nombre es Muy Corto')
                     .max(20,'El Nombre es Muy Largo')
                     .required('El Nombre del Cliente es Obligatorio'),
+        empresa: Yup.string()
+                    .required('El Nombre de la Empresa es Obligatorio'),
+        email: Yup.string()
+                  .required('El email del cliente es obligatorio')
+                  .email('Email no valido'),
+        telefono: Yup.number()
+                     .typeError('El numero no es valido')
+                     .integer('Numero no valido')
+                     .positive('Numero no valido'),
+        
+                    
         
     })
 
@@ -62,6 +73,9 @@ const Formulario = () => {
                             placeholder="Empresa del Cliente"
                             name="empresa"
                         />
+                        {errors.empresa && touched.empresa ? (
+                            <Alerta>{errors.empresa}</Alerta>
+                        ): null}
                     </div>
                     <div className='mb-4'>
                         <label 
@@ -75,6 +89,9 @@ const Formulario = () => {
                             placeholder="Email del Cliente"
                             name="email"
                         />
+                        {errors.email && touched.email ? (
+                            <Alerta>{errors.email}</Alerta>
+                        ): null}
                     </div>
                     <div className='mb-4'>
                         <label 
@@ -88,6 +105,9 @@ const Formulario = () => {
                             placeholder="Telefono del Cliente"
                             name="telefono"
                         />
+                        {errors.telefono && touched.telefono ? (
+                            <Alerta>{errors.telefono}</Alerta>
+                        ): null}
                     </div>
                     <div className='mb-4'>
                         <label 
