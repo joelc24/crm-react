@@ -9,7 +9,7 @@ const Layout = () => {
                 <nav className='mt-10'>
                     <Link 
                         to="/clientes"
-                        className={` ${urlActual === '/clientes' ? 'text-blue-300' : ''} 9text-white text-2xl block mt-2 hover:text-blue-300`}
+                        className={` ${urlActual === '/clientes' ? 'text-blue-300' : ''} text-white text-2xl block mt-2 hover:text-blue-300`}
                     >Clientes</Link>
                     <Link 
                         to="/clientes/nuevo"
