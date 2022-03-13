@@ -1,3 +1,20 @@
 {
-  "clientes": []
+  "clientes": [
+    {
+      "nombre": "Joel",
+      "empresa": "Codigo con Joel",
+      "email": "correo@correo.com",
+      "telefono": "3137700862",
+      "notas": "Prueba de validación",
+      "id": 1
+    },
+    {
+      "nombre": "Joel",
+      "empresa": "Codigo con Joel",
+      "email": "correo@correo.com",
+      "telefono": "3137700862",
+      "notas": "Prueba uno",
+      "id": 2
+    }
+  ]
 }
