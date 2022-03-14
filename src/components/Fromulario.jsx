@@ -2,8 +2,9 @@ import { Formik, Form, Field } from 'formik'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import Alerta from './Alerta'
+import Spinner from './Spinner'
 
-const Formulario = ({cliente}) => {
+const Formulario = ({cliente,cargando}) => {
 
     const navigate = useNavigate()
 
@@ -46,6 +47,7 @@ const Formulario = ({cliente}) => {
         }
     }
     return ( 
+        cargando ? <Spinner/> : (
         <div className="bg-white mt-10 px-5 py-10 rounded-md shadow-md md:w-3/4 mx-auto">
             <h1 className="text-gray-600 font-bold text-xl uppercase text-center">{cliente?.nombre ? "Editar Cliente" : "Agregar Cliente"}</h1>
             <Formik
@@ -155,11 +157,14 @@ const Formulario = ({cliente}) => {
                 )}}
             </Formik>
         </div>
+
+        )
      );
 }
  
 Formulario.defaultProps = {
-    cliente: {}
+    cliente: {},
+    cargando: false
 }
 
 export default Formulario;
