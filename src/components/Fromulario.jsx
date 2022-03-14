@@ -2,6 +2,7 @@ import { Formik, Form, Field } from 'formik'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import Alerta from './Alerta'
+import Cliente from './Cliente'
 import Spinner from './Spinner'
 
 const Formulario = ({cliente,cargando}) => {
@@ -29,17 +30,35 @@ const Formulario = ({cliente,cargando}) => {
 
     const handleSubmit = async valores =>{
         try {
-            const url = "http://localhost:4000/clientes"
+            let respuesta
+           if(cliente.id){
+               //EDITANDO REGISTRO
+            const url = `http://localhost:4000/clientes/${cliente.id}`
 
-            const respuesta = await fetch(url,{
-                method: 'POST',
+                respuesta = await fetch(url,{
+                method: 'PUT',
                 body: JSON.stringify(valores),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }) 
 
-            const resultado = respuesta.json()
+        
+           }else{
+               //NUEVO REGISTRO
+               const url = "http://localhost:4000/clientes"
+
+                   respuesta = await fetch(url,{
+                   method: 'POST',
+                   body: JSON.stringify(valores),
+                   headers: {
+                       'Content-Type': 'application/json'
+                   }
+               }) 
+   
+           }
+
+            await respuesta.json()
             console.log(resultado)
             navigate('/clientes')
         } catch (error) {
