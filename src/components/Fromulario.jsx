@@ -50,12 +50,13 @@ const Formulario = ({cliente}) => {
             <h1 className="text-gray-600 font-bold text-xl uppercase text-center">Agregar Clientes</h1>
             <Formik
                 initialValues={{
-                    nombre: '',
-                    empresa: '',
-                    email: '',
-                    telefono: '',
-                    notas: ''
+                    nombre: cliente?.nombre ?? "",
+                    empresa: cliente?.empresa ?? "",
+                    email: cliente?.email ?? "",
+                    telefono: cliente?.telefono ?? "",
+                    notas: cliente?.notas ?? ""
                 }}
+                enableReinitialize={true}
                 onSubmit={async (values, {resetForm})=> {
                     await handleSubmit(values)
                     resetForm()
@@ -157,4 +158,8 @@ const Formulario = ({cliente}) => {
      );
 }
  
+Formulario.defaultProps = {
+    cliente: {}
+}
+
 export default Formulario;
